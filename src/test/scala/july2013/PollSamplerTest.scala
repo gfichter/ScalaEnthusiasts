@@ -16,7 +16,7 @@ class PollSamplerTest extends FunSpec with ShouldMatchers {
     PollSample(party = "Democrat", sex = "Female", position = "For"),
     PollSample(party = "Republican", sex = "Female", position = "For"))
 
-  it("Should make a tree using explicit RawPollSampleWrapper") {
+  it("Should make a tree using an explicit RawPollSampleWrapper") {
     val pollTree = RawPollSampleWrapper(rawData).makeTree(Party, Sex, Position)
     uglyValidationOne(pollTree)
   }
