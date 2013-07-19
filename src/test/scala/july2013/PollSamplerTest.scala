@@ -31,17 +31,17 @@ class PollSamplerTest extends FunSpec with ShouldMatchers {
   it("can tally samples") {
     val pollTree = rawData.makeTree(Party, Sex, Position)
 
-    pollTree.tally(Democrat)./(Male)./(For) should be(1)
-    pollTree.tally(Democrat)./(Female)./(For) should be(2)
-    pollTree.tally(Democrat)./(Female)./(Against) should be(0)
+    pollTree.tally(PollFieldValues(List(Democrat, Male, For))) should be(1)
+    pollTree.tally(PollFieldValues(List(Democrat, Female, For))) should be(2)
+    pollTree.tally(PollFieldValues(List(Democrat, Female, Against))) should be(0)
   }
 
   it("can use an implicit wrapper monkey patched against a poll tree") {
     val pollTree = rawData.makeTree(Party, Sex, Position)
 
-    pollTree.tally(Democrat)./(Male)./(For) should be(1)
-    pollTree.tally(Democrat)./(Female)./(For) should be(2)
-    pollTree.tally(Democrat)./(Female)./(Against) should be(0)
+    pollTree.tally(List(Democrat, Male, For)) should be(1)
+    pollTree.tally(List(Democrat, Female, For)) should be(2)
+    pollTree.tally(List(Democrat, Female, Against)) should be(0)
   }
 
   it("can build a two-level XPath-like search expression") {
@@ -94,7 +94,7 @@ class PollSamplerTest extends FunSpec with ShouldMatchers {
     }
   }
 
-  def uglyValidationTwo(ptr: PollTreeWrapper1) = {
+  def uglyValidationTwo(ptr: PollSearcher) = {
     val men = ptr.pollTree.get("Male").get
     val women = ptr.pollTree.get("Female").get
     men.get("For").get.get("Democrat").get.size should be(1)
@@ -107,7 +107,7 @@ class PollSamplerTest extends FunSpec with ShouldMatchers {
     women.get("Against").get.get("Republican").get.size should be(1)
   }
 
-  def uglyValidationOne(ptr: PollTreeWrapper1) = {
+  def uglyValidationOne(ptr: PollSearcher) = {
     val democrats = ptr.pollTree.get("Democrat").get
     val republicans = ptr.pollTree.get("Republican").get
     democrats.get("Male").get.get("For").get.size should be(1)
