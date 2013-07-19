@@ -1,11 +1,5 @@
 package july2013
-
 import org.scalatest._
-
-case class PollSample(
-  party: String,
-  sex: String,
-  position: String)
 
 class GroupTest2 extends FunSpec with ShouldMatchers {
 
@@ -29,7 +23,18 @@ class GroupTest2 extends FunSpec with ShouldMatchers {
     }
     
   }   
-  */  
+  */
+    
+  /*
+  describe("final goal for mini-DSL") {
+    it("should be awesome") {
+      val poll = rawData.makeTree(Party, Sex, Position)
+      poll find Democrat/Female/For size should be(3)
+      poll find Republican/Male/Against size should be(3)
+    }
+  }
+  */
+  
   describe("group tests") {
 
     it("should group an unordered list") {
@@ -39,6 +44,8 @@ class GroupTest2 extends FunSpec with ShouldMatchers {
       byPartyAndPosition.get("Democrat Against").get.size should be(1)
       byPartyAndPosition.get("Republican Against").get.size should be(3)
     }
+    
+    
 
     def byProperty(pols:Seq[PollSample], s: Symbol): Map[String, Seq[PollSample]] = s match {
       case 'party => pols.groupBy(_.party)
@@ -111,21 +118,6 @@ class GroupTest2 extends FunSpec with ShouldMatchers {
 
   }
 }
-  
-//  it("can make a tree") {
-//    val pollTree =
-//      rawData.groupBy(_.party)
-//        .mapValues(_.groupBy(_.sex)
-//          .mapValues(_.groupBy(_.position)))
-//    val democrats = pollTree.get("Democrat").get
-//    val republicans = pollTree.get("Republican").get
-//
-//    describe("first level group") {
-//      
-//    it("has the right number of dems and repubs") {
-//      democrats.size should be(4)
-//      republicans.size should be(4)
-//    }
 //    }
 //    
 //    democrats.get("Male").get.get("For").get.size should be(1)
