@@ -21,27 +21,27 @@ class PollSamplerTest extends FunSpec with ShouldMatchers {
   it("Should make a tree using an implicit (monkey-patched) RawPollSampleWrapper") {
     val pollTree = rawData.makeTree(Party, Sex, Position)
 
-    pollTree.tally(Democrat / Male / For) should be(1)
-    pollTree.tally(Democrat / Male / Against) should be(1)
-    pollTree.tally(Democrat / Female / For) should be(2)
-    pollTree.tally(Democrat / Female / Against) should be(0)
-    pollTree.tally(Republican / Male / For) should be(0)
-    pollTree.tally(Republican / Male / Against) should be(2)
-    pollTree.tally(Republican / Female / For) should be(1)
-    pollTree.tally(Republican / Female / Against) should be(1)
+    pollTree tally Democrat/Male/For should be(1)
+    pollTree tally Democrat/Male/Against should be(1)
+    pollTree tally Democrat/Female/For should be(2)
+    pollTree tally Democrat/Female/Against should be(0)
+    pollTree tally Republican/Male/For should be(0)
+    pollTree tally Republican/Male/Against should be(2)
+    pollTree tally Republican/Female/For should be(1)
+    pollTree tally Republican/Female/Against should be(1)
   }
 
   it("Can make a tree with fields in any order") {
     val pollTree = rawData.makeTree(Sex, Position, Party)
 
-    pollTree.tally( Male / For / Democrat) should be(1)
-    pollTree.tally( Male / Against / Democrat) should be(1)
-    pollTree.tally( Male / For / Republican) should be(0)
-    pollTree.tally( Male / Against / Republican) should be(2)
-    pollTree.tally( Female / For / Democrat) should be(2)
-    pollTree.tally( Female / Against / Democrat) should be(0)
-    pollTree.tally( Female / For / Republican) should be(1)
-    pollTree.tally( Female / Against / Republican) should be(1)
+    pollTree tally Male/For/Democrat should be(1)
+    pollTree tally Male/Against/Democrat should be(1)
+    pollTree tally Male/For/Republican should be(0)
+    pollTree tally Male/Against/Republican should be(2)
+    pollTree tally Female/For/Democrat should be(2)
+    pollTree tally Female/Against/Democrat should be(0)
+    pollTree tally Female/For/Republican should be(1)
+    pollTree tally Female/Against/Republican should be(1)
   }
 
   it("requires you search all three levels (boo)") {
