@@ -18,7 +18,7 @@ class PollSamplerTest extends FunSpec with ShouldMatchers {
     PollSample(party = "Democrat", sex = "Female", position = "For"),
     PollSample(party = "Republican", sex = "Female", position = "For"))
 
-  it("Should make a tree using an implicit (monkey-patched) RawPollSampleWrapper") {
+  it("Can convert raw data to a tree and search using XPath-like syntax") {
     val pollTree = rawData.makeTree(Party, Sex, Position)
 
     pollTree tally Democrat/Male/For should be(1)
