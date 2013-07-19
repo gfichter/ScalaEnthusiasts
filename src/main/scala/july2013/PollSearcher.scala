@@ -2,6 +2,7 @@ package july2013
 
 case class PollSearcher(pollTree: Map[String, Map[String, Map[String, Seq[PollSample]]]]) {
   
+  // TODO:  This is ugly.  Use recursion
   def tally(fieldValues: PollFieldValues): Int = {
     val fields = fieldValues.fieldValues
     require(fields.length == 3)  // TODO:  Would like to relax this constraint
